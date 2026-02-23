@@ -1,0 +1,640 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Art Exhibit | Your Name</title>
+  <meta name="description" content="Art exhibit page showcasing my art project, sample works, pricing, and payment options." />
+
+  <style>
+    :root{
+      --bg:#0b0f17;
+      --card:#111827;
+      --text:#e5e7eb;
+      --muted:#9ca3af;
+      --brand:#60a5fa;
+      --brand2:#a78bfa;
+      --line:#1f2937;
+      --good:#22c55e;
+      --warn:#f59e0b;
+      --shadow: 0 12px 30px rgba(0,0,0,.35);
+      --radius: 18px;
+      --max: 1100px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: radial-gradient(1200px 500px at 20% 0%, rgba(96,165,250,.18), transparent 60%),
+                  radial-gradient(1200px 500px at 80% 10%, rgba(167,139,250,.18), transparent 55%),
+                  var(--bg);
+      color:var(--text);
+      line-height:1.5;
+    }
+    a{color:inherit; text-decoration:none}
+    img{max-width:100%; display:block}
+
+    /* Layout */
+    .wrap{max-width:var(--max); margin:0 auto; padding:18px}
+    header{
+      position: sticky; top:0; z-index:10;
+      backdrop-filter: blur(10px);
+      background: rgba(11,15,23,.7);
+      border-bottom: 1px solid rgba(31,41,55,.6);
+    }
+    .nav{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:12px;
+      padding:12px 18px;
+      max-width:var(--max);
+      margin:0 auto;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      font-weight:800;
+      letter-spacing:.4px;
+    }
+    .logo{
+      width:38px; height:38px; border-radius:12px;
+      background: linear-gradient(135deg, var(--brand), var(--brand2));
+      box-shadow: var(--shadow);
+    }
+    .links{
+      display:flex; gap:14px; align-items:center; flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+    .links a{
+      color:var(--muted);
+      font-weight:600;
+      padding:8px 10px;
+      border-radius:12px;
+      border:1px solid transparent;
+    }
+    .links a:hover{
+      color:var(--text);
+      border-color: rgba(96,165,250,.35);
+      background: rgba(96,165,250,.08);
+    }
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      gap:10px;
+      padding:12px 14px;
+      border-radius:14px;
+      border: 1px solid rgba(96,165,250,.35);
+      background: rgba(96,165,250,.10);
+      color: var(--text);
+      font-weight:700;
+    }
+    .btn:hover{background: rgba(96,165,250,.18)}
+    .btn.primary{
+      background: linear-gradient(135deg, rgba(96,165,250,.95), rgba(167,139,250,.95));
+      border: none;
+      color: #08101e;
+      box-shadow: 0 12px 24px rgba(96,165,250,.25);
+    }
+    .btn.primary:hover{filter: brightness(1.05)}
+
+    /* Sections */
+    section{padding:34px 0}
+    .hero{
+      padding:46px 0 10px;
+    }
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1.25fr .75fr;
+      gap:18px;
+      align-items:stretch;
+    }
+    .card{
+      background: rgba(17,24,39,.75);
+      border: 1px solid rgba(31,41,55,.9);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    .pad{padding:18px}
+    .kicker{
+      display:inline-flex; gap:8px; align-items:center;
+      padding:6px 10px; border-radius:999px;
+      border:1px solid rgba(96,165,250,.35);
+      color: var(--muted);
+      background: rgba(96,165,250,.08);
+      font-weight:700;
+      font-size: 13px;
+    }
+    h1{
+      margin:14px 0 10px;
+      font-size: clamp(28px, 5vw, 46px);
+      line-height:1.05;
+      letter-spacing:-.6px;
+    }
+    .sub{
+      color: var(--muted);
+      font-size: 16px;
+      margin: 0 0 16px;
+    }
+    .cta-row{display:flex; gap:12px; flex-wrap:wrap; margin-top:14px}
+    .mini{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:12px;
+      margin-top:12px;
+    }
+    .mini .tile{
+      border-radius:16px;
+      border:1px dashed rgba(156,163,175,.35);
+      background: rgba(2,6,23,.35);
+      padding:12px;
+      color: var(--muted);
+      font-weight:700;
+      min-height: 84px;
+    }
+    .tile strong{color:var(--text)}
+    .info{
+      display:flex; flex-direction:column; gap:12px;
+      height:100%;
+    }
+    .profile{
+      display:flex; gap:12px; align-items:center;
+      padding:14px;
+      border-radius:16px;
+      border:1px solid rgba(31,41,55,.9);
+      background: rgba(2,6,23,.35);
+    }
+    .avatar{
+      width:54px; height:54px; border-radius:16px;
+      background: linear-gradient(135deg, rgba(34,197,94,.35), rgba(96,165,250,.35));
+      border:1px solid rgba(156,163,175,.25);
+    }
+    .profile .name{font-weight:900}
+    .profile .role{color:var(--muted); font-weight:700; font-size: 13px}
+    .note{
+      padding:14px;
+      border-radius:16px;
+      border:1px solid rgba(245,158,11,.35);
+      background: rgba(245,158,11,.08);
+      color: #fde68a;
+      font-weight:700;
+      font-size: 14px;
+    }
+
+    /* Headings */
+    .section-title{
+      display:flex; align-items:flex-end; justify-content:space-between; gap:14px;
+      margin-bottom:14px;
+    }
+    .section-title h2{
+      margin:0;
+      font-size: 24px;
+      letter-spacing:-.3px;
+    }
+    .section-title p{margin:0; color:var(--muted); font-weight:600}
+
+    /* Gallery */
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:12px;
+    }
+    .art{
+      overflow:hidden;
+      border-radius: 18px;
+      border:1px solid rgba(31,41,55,.9);
+      background: rgba(2,6,23,.35);
+      cursor:pointer;
+      position:relative;
+      min-height: 200px;
+    }
+    .art img{width:100%; height:230px; object-fit:cover; transition: transform .25s ease}
+    .art:hover img{transform: scale(1.05)}
+    .tag{
+      position:absolute; left:12px; bottom:12px;
+      padding:6px 10px;
+      border-radius:999px;
+      background: rgba(0,0,0,.45);
+      border:1px solid rgba(255,255,255,.18);
+      font-weight:800;
+      font-size: 13px;
+    }
+
+    /* Pricing */
+    .pricing{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:12px;
+    }
+    .price-card{padding:18px}
+    .price-card h3{margin:0 0 6px}
+    .price{
+      font-size:32px;
+      font-weight:900;
+      margin:8px 0 10px;
+      letter-spacing:-.6px;
+    }
+    ul{margin:0; padding-left:18px; color: var(--muted); font-weight:650}
+    li{margin:8px 0}
+    .pill{
+      display:inline-flex; padding:6px 10px; border-radius:999px;
+      background: rgba(34,197,94,.10);
+      border:1px solid rgba(34,197,94,.35);
+      color: #bbf7d0;
+      font-weight:800;
+      font-size:12px;
+      margin-bottom:10px;
+    }
+
+    /* Payments + Contact */
+    .two{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:12px;
+    }
+    .muted{color:var(--muted); font-weight:650}
+    .pay-list{
+      display:grid; gap:10px; margin-top:10px;
+    }
+    .pay-item{
+      display:flex; justify-content:space-between; gap:10px;
+      padding:12px; border-radius:16px;
+      border:1px solid rgba(31,41,55,.9);
+      background: rgba(2,6,23,.35);
+      font-weight:750;
+    }
+    .badge{
+      padding:4px 10px; border-radius:999px; font-size:12px; font-weight:900;
+      border:1px solid rgba(96,165,250,.35);
+      background: rgba(96,165,250,.10);
+      color: #cfe7ff;
+      white-space:nowrap;
+    }
+    form{
+      display:grid; gap:10px; margin-top:10px;
+    }
+    input, textarea{
+      width:100%;
+      padding:12px 12px;
+      border-radius:14px;
+      border:1px solid rgba(31,41,55,.9);
+      background: rgba(2,6,23,.35);
+      color: var(--text);
+      font-size: 15px;
+      outline:none;
+    }
+    textarea{min-height: 110px; resize: vertical}
+
+    footer{
+      border-top:1px solid rgba(31,41,55,.75);
+      padding:20px 0 40px;
+      color: var(--muted);
+      font-weight:650;
+    }
+
+    /* Lightbox */
+    .lightbox{
+      position:fixed; inset:0;
+      background: rgba(0,0,0,.75);
+      display:none;
+      place-items:center;
+      padding:18px;
+      z-index: 50;
+    }
+    .lightbox.open{display:grid}
+    .lightbox .box{
+      max-width: 980px;
+      width: 100%;
+      border-radius: 18px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.12);
+      background: #0b0f17;
+      box-shadow: var(--shadow);
+    }
+    .lightbox img{width:100%; max-height: 70vh; object-fit:contain; background:#000}
+    .lightbox .cap{
+      padding:12px 14px;
+      display:flex; justify-content:space-between; gap:12px; align-items:center;
+      color: var(--muted);
+      font-weight:700;
+    }
+    .x{
+      cursor:pointer;
+      padding:8px 12px;
+      border-radius:12px;
+      border:1px solid rgba(255,255,255,.16);
+      background: rgba(255,255,255,.08);
+      color: var(--text);
+      font-weight:900;
+    }
+
+    /* Mobile */
+    @media (max-width: 880px){
+      .hero-grid{grid-template-columns: 1fr}
+      .grid{grid-template-columns: repeat(2, 1fr)}
+      .pricing{grid-template-columns: 1fr}
+      .two{grid-template-columns: 1fr}
+    }
+    @media (max-width: 460px){
+      .grid{grid-template-columns: 1fr}
+      .links a{padding:6px 8px}
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="nav">
+      <div class="brand">
+        <div class="logo" aria-hidden="true"></div>
+        <div>
+          <div style="font-size:14px; color:var(--muted); font-weight:800; margin-bottom:1px;">Art Exhibit</div>
+          <div style="font-size:16px; font-weight:900;">YOUR NAME</div>
+        </div>
+      </div>
+
+      <nav class="links" aria-label="Primary">
+        #aboutAbout</a>
+        #gallerySample Art</a>
+        #pricingPricing</a>
+        #paymentPayment</a>
+        #contactContact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <!-- HERO -->
+    <section class="hero" id="about">
+      <div class="hero-grid">
+        <div class="card pad">
+          <span class="kicker">✨ New Collection • 2026</span>
+          <h1>“PROJECT TITLE”<br/>A Modern Art Exhibit</h1>
+          <p class="sub">
+            Write a short story about your art project here. Example:
+            “This collection explores identity, memory, and everyday life through color and texture.”
+          </p>
+
+          <div class="cta-row">
+            #galleryView Sample Art</a>
+            #pricingSee Pricing</a>
+            #paymentHow to Pay</a>
+          </div>
+
+          <div class="mini">
+            <div class="tile"><strong>Medium</strong><br/>Acrylic • Digital • Mixed</div>
+            <div class="tile"><strong>Availability</strong><br/>Commissions • Prints</div>
+            <div class="tile"><strong>Location</strong><br/>Philippines / Online</div>
+            <div class="tile"><strong>Turnaround</strong><br/>3–14 days</div>
+          </div>
+        </div>
+
+        <div class="info">
+          <div class="card profile">
+            <div class="avatar" aria-hidden="true"></div>
+            <div>
+              <div class="name">YOUR NAME</div>
+              <div class="role">Artist • Illustrator • Creator</div>
+              <div class="muted" style="margin-top:6px;">IG: @yourhandle • FB: /yourpage</div>
+            </div>
+          </div>
+
+          <div class="card note">
+            📌 Tip: Replace the gallery images with your own (instructions below).
+          </div>
+
+          <div class="card pad">
+            <div style="font-weight:900; margin-bottom:6px;">What you can offer</div>
+            <div class="muted">
+              Original paintings, custom commissions, digital portraits, and art prints—made with your style and story.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GALLERY -->
+    <section id="gallery">
+      <div class="section-title">
+        <div>
+          <h2>Sample Art</h2>
+          <p>Tap any artwork to view larger.</p>
+        </div>
+        #contactRequest a Commission</a>
+      </div>
+
+      <div class="grid">
+        <!-- Replace these image URLs with your own -->
+        <div class="art" data-caption="Artwork #1 • Acrylic on canvas">
+          https://images.unsplash.com/photo-1541961017774-22349e4a1262?auto=format&fit=crop&w=1200&q=60
+          <div class="tag">Artwork #1</div>
+        </div>
+        <div class="art" data-caption="Artwork #2 • Mixed media">
+          https://images.unsplash.com/photo-1547891654-e66ed7ebb968?auto=format&fit=crop&w=1200&q=60
+          <div class="tag">Artwork #2</div>
+        </div>
+        <div class="art" data-caption="Artwork #3 • Digital illustration">
+          https://images.unsplash.com/photo-1526318472351-c75fcf070305?auto=format&fit=crop&w=1200&q=60
+          <div class="tag">Artwork #3</div>
+        </div>
+        <div class="art" data-caption="Artwork #4 • Portrait study">
+          https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&w=1200&q=60
+          <div class="tag">Artwork #4</div>
+        </div>
+        <div class="art" data-caption="Artwork #5 • Abstract series">
+          https://images.unsplash.com/photo-1518998053901-5348d3961a04?auto=format&fit=crop&w=1200&q=60
+          <div class="tag">Artwork #5</div>
+        </div>
+        <div class="art" data-caption="Artwork #6 • Print available">
+          https://images.unsplash.com/photo-1549490349-8643362247b5?auto=format&fit=crop&w=1200&q=60
+          <div class="tag">Artwork #6</div>
+        </div>
+      </div>
+
+      <p class="muted" style="margin-top:12px;">
+        ✅ Want me to help you add more artworks + categories (Portraits, Abstract, Prints)? Just tell me.
+      </p>
+    </section>
+
+    <!-- PRICING -->
+    <section id="pricing">
+      <div class="section-title">
+        <div>
+          <h2>Pricing</h2>
+          <p>Clear packages so clients can choose easily.</p>
+        </div>
+      </div>
+
+      <div class="pricing">
+        <div class="card price-card">
+          <div class="pill">Best for gifts</div>
+          <h3>Digital Portrait</h3>
+          <div class="price">₱799+</div>
+          <ul>
+            <li>1 subject (add ₱300 each)</li>
+            <li>High‑resolution JPG/PNG</li>
+            <li>2 minor revisions</li>
+            <li>3–5 days delivery</li>
+          </ul>
+          <div class="cta-row" style="margin-top:14px;">
+            #contactOrder this</a>
+          </div>
+        </div>
+
+        <div class="card price-card">
+          <div class="pill">Most popular</div>
+          <h3>Canvas / Traditional</h3>
+          <div class="price">₱2,499+</div>
+          <ul>
+            <li>8x10 / 10x12 / custom sizes</li>
+            <li>Materials included</li>
+            <li>1 revision (sketch approval)</li>
+            <li>7–14 days turnaround</li>
+          </ul>
+          <div class="cta-row" style="margin-top:14px;">
+            #contactOrder this</a>
+          </div>
+        </div>
+
+        <div class="card price-card">
+          <div class="pill">For events / business</div>
+          <h3>Murals / Bulk Prints</h3>
+          <div class="price">Quote</div>
+          <ul>
+            <li>Custom concept + mockups</li>
+            <li>Schedule-based timeline</li>
+            <li>Contract / downpayment</li>
+            <li>Delivery & installation options</li>
+          </ul>
+          <div class="cta-row" style="margin-top:14px;">
+            #contactRequest quote</a>
+          </div>
+        </div>
+      </div>
+
+      <p class="muted" style="margin-top:12px;">
+        Add a note here like: “50% downpayment to start. Balance before delivery.”
+      </p>
+    </section>
+
+    <!-- PAYMENT + CONTACT -->
+    <section id="payment">
+      <div class="section-title">
+        <div>
+          <h2>Mode of Payment</h2>
+          <p>Choose what’s convenient for clients.</p>
+        </div>
+      </div>
+
+      <div class="two">
+        <div class="card pad">
+          <div style="font-weight:900;">Payment options</div>
+          <p class="muted" style="margin:8px 0 0;">
+            Replace these with your real details. Don’t publish your full bank number if you don’t want to—use DM to share.
+          </p>
+
+          <div class="pay-list">
+            <div class="pay-item">
+              <div>GCash</div>
+              <span class="badge">09XX-XXX-XXXX</span>
+            </div>
+            <div class="pay-item">
+              <div>Bank Transfer</div>
+              <span class="badge">BDO/UnionBank</span>
+            </div>
+            <div class="pay-item">
+              <div>PayPal</div>
+              <span class="badge">you@email.com</span>
+            </div>
+            <div class="pay-item">
+              <div>Cash on Delivery (optional)</div>
+              <span class="badge">Local only</span>
+            </div>
+          </div>
+
+          <div class="muted" style="margin-top:12px;">
+            ✅ Recommended: state your terms:
+            <br/>• Downpayment: 50% (to start)
+            <br/>• Balance: before delivery
+            <br/>• No rush orders unless agreed
+          </div>
+        </div>
+
+        <div class="card pad" id="contact">
+          <div style="font-weight:900;">Contact / Order Form</div>
+          <p class="muted" style="margin-top:6px;">
+            This form uses “mailto” (opens email app). Later, we can connect it to Google Forms or a free form service.
+          </p>
+
+          mailto:your@email.com
+            <input name="name" placeholder="Your Name" required />
+            <input name="contact" placeholder="Email or Mobile Number" required />
+            <input name="service" placeholder="What do you want? (Portrait, Canvas, Prints...)" />
+            <textarea name="message" placeholder="Describe your request: size, style, deadline, reference link..."></textarea>
+            <button class="btn primary" type="submit">Send Inquiry</button>
+          </form>
+
+          <div class="muted" style="margin-top:12px;">
+            Socials:
+            <br/>• Facebook: #/yourpage</a>
+            <br/>• Instagram: #@yourhandle</a>
+            <br/>• TikTok: #@yourhandle</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="wrap" style="padding:0;">
+        <div style="display:flex; flex-wrap:wrap; gap:10px; justify-content:space-between; align-items:center;">
+          <div>© <span id="year"></span> YOUR NAME — Art Exhibit</div>
+          <div>Made mobile‑friendly ✅</div>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <div class="box">
+      <img id="lbImg" alt="Expanded artwork">
+      <div class="cap">
+        <div id="lbCap">Caption</div>
+        <button class="x" id="lbClose" type="button">Close ✕</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Year
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Lightbox
+    const lb = document.getElementById("lightbox");
+    const lbImg = document.getElementById("lbImg");
+    const lbCap = document.getElementById("lbCap");
+    const closeBtn = document.getElementById("lbClose");
+
+    document.querySelectorAll(".art").forEach(card => {
+      card.addEventListener("click", () => {
+        const img = card.querySelector("img");
+        lbImg.src = img.src;
+        lbImg.alt = img.alt;
+        lbCap.textContent = card.getAttribute("data-caption") || img.alt;
+        lb.classList.add("open");
+        lb.setAttribute("aria-hidden", "false");
+      });
+    });
+
+    function closeLB(){
+      lb.classList.remove("open");
+      lb.setAttribute("aria-hidden", "true");
+      lbImg.src = "";
+    }
+    closeBtn.addEventListener("click", closeLB);
+    lb.addEventListener("click", (e) => {
+      if(e.target === lb) closeLB();
+    });
+    document.addEventListener("keydown", (e) => {
+      if(e.key === "Escape") closeLB();
+    });
+  </script>
+</body>
+</html>
